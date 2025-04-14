@@ -63,5 +63,9 @@
   "homepage": "https://github.com/prebuild/prebuild-install",
   "engines": {
     "node": ">=10"
+  },
+  "prebuild": {
+    "sqlite3": "https://registry.npmmirror.com/-/binary/sqlite3",
+    "canvas": "https://registry.npmmirror.com/-/binary/canvas"
   }
 }

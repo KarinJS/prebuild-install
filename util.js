@@ -41,6 +41,16 @@ function urlTemplate (opts) {
   }
 
   const packageName = '{name}-v{version}-{runtime}-v{abi}-{platform}{libc}-{arch}.tar.gz'
+  
+  /** 
+   * 新增默认下载地址配置
+   * @time 2025年4月14日23:42:50
+   */
+  const prebuildPkg = require(`${__dirname}/package.json`)
+  if (prebuildPkg.prebuild[opts.pkg.name]) {
+    return opts.pkg.prebuild[opts.pkg.name] + '/{tag_prefix}{version}/' + packageName
+  }
+
   const hostMirrorUrl = getHostMirrorUrl(opts)
 
   if (hostMirrorUrl) {
