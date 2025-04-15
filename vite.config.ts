@@ -16,7 +16,7 @@ export default defineConfig({
         ...builtinModules.map((mod) => `node:${mod}`),
       ],
     },
-    minify: false,
+    minify: 'terser',
     commonjsOptions: {
       include: [
         './node_modules/**',
