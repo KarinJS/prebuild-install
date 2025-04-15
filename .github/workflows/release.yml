@@ -1,17 +1,50 @@
-name: Release
+name: release
 on:
   push:
-    tags: ['*']
+    # 监听 main 分支的 push 事件
+    branches:
+      - main
+# 赋予 release-please-action 权限
 permissions:
   contents: write
+  pull-requests: write
 jobs:
-  release:
-    name: Release
+  # 设置 release-please 任务
+  release-please:
+    # 设置任务运行环境为 ubuntu-latest
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Create GitHub release
-        uses: docker://antonyurchenko/git-release:v4
+      # 使用 release-please-action 动作来自动创建发布 PR
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          # 设置发布类型为 node
+          release-type: node
+      # 检出代码
+      - uses: actions/checkout@v4
+        if: ${{ steps.release.outputs.release_created }}
+      # 设置 Node.js 环境
+      - uses: actions/setup-node@v4
+        with:
+          # 设置 Node.js 版本
+          node-version: 20
+          # 设置 npm 源
+          registry-url: https://registry.npmjs.org
+        if: ${{ steps.release.outputs.release_created }}
+      # 新增 vite
+      - run: npm install @types/node@18 vite terser -D
+        if: ${{ steps.release.outputs.release_created }}
+      # 先打包rc
+      - run: npx vite build --config vite.config.rc.ts
+        if: ${{ steps.release.outputs.release_created }}
+      # 最终打包
+      - run: npx vite build
+        if: ${{ steps.release.outputs.release_created }}
+      # 删除依赖
+      - run: npm pkg delete dependencies && npm pkg delete devDependencies
+        if: ${{ steps.release.outputs.release_created }}
+      # 发布到 npm
+      - run: npm publish --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        if: ${{ steps.release.outputs.release_created }}

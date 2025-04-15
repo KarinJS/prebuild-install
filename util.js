@@ -48,7 +48,7 @@ function urlTemplate (opts) {
    */
   const prebuildPkg = require(`${__dirname}/package.json`)
   if (prebuildPkg.prebuild[opts.pkg.name]) {
-    return opts.pkg.prebuild[opts.pkg.name] + '/{tag_prefix}{version}/' + packageName
+    return prebuildPkg.prebuild[opts.pkg.name] + '/{tag_prefix}{version}/' + packageName
   }
 
   const hostMirrorUrl = getHostMirrorUrl(opts)
