@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/KarinJS/prebuild-install/compare/v1.2.0...v1.2.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* 4.1的狗屁通乱删我代码 ([92dfa1b](https://github.com/KarinJS/prebuild-install/commit/92dfa1b77136635cfed43e22bfc6708de1b56eed))
+
 ## [1.2.0](https://github.com/KarinJS/prebuild-install/compare/v1.1.0...v1.2.0) (2025-04-15)
 
 
