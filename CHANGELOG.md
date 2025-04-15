@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/KarinJS/prebuild-install/compare/v1.1.0...v1.2.0) (2025-04-15)
+
+
+### Features
+
+* 添加自定义二进制版本支持，更新文档和帮助信息 ([cf58b34](https://github.com/KarinJS/prebuild-install/commit/cf58b34ab5c1e4be07a3c24fb0c56aed596a4074))
+
 ## [1.1.0](https://github.com/KarinJS/prebuild-install/compare/v1.0.1...v1.1.0) (2025-04-15)
 
 

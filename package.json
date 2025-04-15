@@ -1,6 +1,6 @@
 {
   "name": "@karinjs/prebuild-install",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A command line tool to easily install prebuilt binaries for multiple version of node/iojs on a specific platform",
   "scripts": {
     "test": "standard && hallmark --ignore CHANGELOG.md && tape test/*-test.js",
