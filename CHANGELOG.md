@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.0.0 (2025-04-15)
+
+
+### Features
+
+* 使用vite打包 ([ee838e1](https://github.com/KarinJS/prebuild-install/commit/ee838e106ec202893fa1f3889381f5ae12178e52))
+* 新增默认下载地址配置，支持从指定源下载预构建二进制文件 ([9394eda](https://github.com/KarinJS/prebuild-install/commit/9394edaf67d14b87c659ccefb2f905ad66b46c1b))
+
+
+### Bug Fixes
+
+* Calculate correct ABI based on target and runtime ([cbd8ec4](https://github.com/KarinJS/prebuild-install/commit/cbd8ec4e61984754fd4cbece9298a3371b1c2820))
+* ci ([8d18ba7](https://github.com/KarinJS/prebuild-install/commit/8d18ba7ba0bb6ef8f02863a654d81feffc92b457))
+* download prebuilt binaries when installing with pnpm ([a65b3ba](https://github.com/KarinJS/prebuild-install/commit/a65b3ba9387c24a1a77b47e2c6a9800f2c844bb8))
+* download prebuilt binaries when installing with pnpm ([12c6c32](https://github.com/KarinJS/prebuild-install/commit/12c6c32bad54b95a8dbb452e8062ee600835e99b))
+* use mkdirp for creating directories ([3e16eab](https://github.com/KarinJS/prebuild-install/commit/3e16eab480ed345a5a76d408e83cb383b99bf2d2))
+* use mkdirp for creating directories ([1a48014](https://github.com/KarinJS/prebuild-install/commit/1a48014c528ec4ec6fb85205311cefc72896b34c))
+* 修正入口路径、npm包名 ([84104e6](https://github.com/KarinJS/prebuild-install/commit/84104e6684aaf8680db8136b47db9a50b963a70e))
+* 更正入口 ([cca6e7a](https://github.com/KarinJS/prebuild-install/commit/cca6e7a9fe84add9ab272d0627877f81efcc8f7a))
+
 ## [7.1.3] - 2025-01-22
 
 ### Fixed
