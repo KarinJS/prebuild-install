@@ -5,7 +5,7 @@
 
 [English](README.md)
 
-## @karinjs/prebuild-install 增强功能
+## [**@karinjs/prebuild-install**](https://github.com/karinjs/prebuild-install) 增强功能
 
 这个分支包含以下显著改进：
 
@@ -165,6 +165,20 @@ leveldown_local_prebuilds=/path/to/prebuilds
 
 非绝对路径相对于调用prebuild-install的包的目录解析，例如用于嵌套依赖项。
 
+### 自定义二进制包名称
+
+你可以通过命令行参数、配置文件或环境变量自定义下载的二进制包名称：
+
+- 命令行：`--binary-name=yourname`
+- 环境变量：`npm_config_binary_name=yourname`
+- 配置文件（.prebuild-installrc）：`binaryName=yourname`
+
+此参数会影响下载链接、缓存、环境变量前缀等，适用于多包共用二进制或自定义命名场景。
+
+环境变量如：`npm_config_yourname_binary_host`、`npm_config_yourname_local_prebuilds` 也会自动适配。
+
+---
+
 ### 缓存
 
 所有预构建二进制文件都会被缓存以最小化流量。因此，`prebuild-install`首先从缓存中获取二进制文件，如果找不到二进制文件，才会下载。根据环境，缓存文件夹按以下顺序确定：
@@ -176,10 +190,12 @@ leveldown_local_prebuilds=/path/to/prebuilds
 ## 打包优化
 
 `@karinjs/prebuild-install`使用Vite进行了二次打包，打包后的产物实现了0依赖，大大减小了包体积。对比数据：
-- 原版prebuild-install: 770KB
-- @karinjs/prebuild-install: 146KB
 
-这意味着在使用@karinjs/prebuild-install时，可以获得更快的安装速度和更小的磁盘占用空间。数据来源：
+- 原版prebuild-install: 770KB
+- [**@karinjs/prebuild-install**](https://github.com/karinjs/prebuild-install): 146KB
+
+这意味着在使用[**@karinjs/prebuild-install**](https://github.com/karinjs/prebuild-install)时，可以获得更快的安装速度和更小的磁盘占用空间。数据来源：
+
 - [prebuild-install包大小分析](https://pkg-size.dev/prebuild-install)
 - [@karinjs/prebuild-install包大小分析](https://pkg-size.dev/@karinjs/prebuild-install)
 

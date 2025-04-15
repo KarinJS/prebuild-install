@@ -12,6 +12,7 @@ const libc = env.LIBC || process.env.npm_config_libc ||
 // Get the configuration
 module.exports = function (pkg) {
   const pkgConf = pkg.config || {}
+  const binaryName = pkg?.binary?.name || env.npm_config_binary_name
   const buildFromSource = env.npm_config_build_from_source
 
   const rc = require('rc')('prebuild-install', {
@@ -30,7 +31,8 @@ module.exports = function (pkg) {
     'local-address': env.npm_config_local_address,
     'local-prebuilds': 'prebuilds',
     'tag-prefix': 'v',
-    download: env.npm_config_download
+    download: env.npm_config_download,
+    binaryName: binaryName
   }, minimist(process.argv, {
     alias: {
       target: 't',
@@ -41,10 +43,12 @@ module.exports = function (pkg) {
       version: 'v',
       download: 'd',
       buildFromSource: 'build-from-source',
-      token: 'T'
+      token: 'T',
+      binaryName: 'binary-name'
     }
   }))
 
+  if (!rc.binaryName) rc.binaryName = pkg.name
   rc.path = path.resolve(rc.path === true ? '.' : rc.path || '.')
 
   if (napi.isNapiRuntime(rc.runtime) && rc.target === process.versions.node) {

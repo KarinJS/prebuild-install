@@ -8,6 +8,7 @@ prebuild-install [options]
   --arch            arch        (target CPU architecture, see Node OS module docs, default is current arch)
   --platform        platform    (target platform, see Node OS module docs, default is current platform)
   --tag-prefix <prefix>         (github tag prefix, default is "v")
+  --binary-name   <name>        (customize the binary package name, affects download url and env variable prefix)
   --force                       (always use prebuilt binaries when available)
   --build-from-source           (skip prebuild download)
   --verbose                     (log verbosely)

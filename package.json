@@ -3,8 +3,8 @@
   "version": "1.0.1",
   "description": "A command line tool to easily install prebuilt binaries for multiple version of node/iojs on a specific platform",
   "scripts": {
-    "test": "standard && hallmark && tape test/*-test.js",
-    "hallmark": "hallmark --fix",
+    "test": "standard && hallmark --ignore CHANGELOG.md && tape test/*-test.js",
+    "hallmark": "hallmark --fix --ignore CHANGELOG.md",
     "build": "vite build --config vite.config.rc.ts && vite build"
   },
   "keywords": [

@@ -5,7 +5,7 @@
 
 [中文文档](README_ZH.md)
 
-## @karinjs/prebuild-install Enhancements
+## [**@karinjs/prebuild-install**](https://github.com/karinjs/prebuild-install) Enhancements
 
 This fork includes significant improvements:
 
@@ -165,6 +165,20 @@ This option will look directly in that folder for bundles created with `prebuild
 
 Non-absolute paths resolve relative to the directory of the package invoking prebuild-install, e.g. for nested dependencies.
 
+### Custom Binary Name
+
+You can customize the binary package name via CLI, config file, or environment variable:
+
+- CLI: `--binary-name=yourname`
+- Env: `npm_config_binary_name=yourname`
+- Config file (.prebuild-installrc): `binaryName=yourname`
+
+This affects the download url, cache, and env variable prefix. Useful for sharing binaries across packages or custom naming.
+
+Environment variables like `npm_config_yourname_binary_host`, `npm_config_yourname_local_prebuilds` will be used accordingly.
+
+---
+
 ### Cache
 
 All prebuilt binaries are cached to minimize traffic. So first `prebuild-install` picks binaries from the cache and if no binary could be found, it will be downloaded. Depending on the environment, the cache folder is determined in the following order:
@@ -176,10 +190,12 @@ All prebuilt binaries are cached to minimize traffic. So first `prebuild-install
 ## Package Optimization
 
 `@karinjs/prebuild-install` has been rebuilt using Vite, resulting in a zero-dependency package that significantly reduces package size. Comparison data:
-- Original prebuild-install: 770KB
-- @karinjs/prebuild-install: 146KB
 
-This means faster installation times and reduced disk space usage when using @karinjs/prebuild-install. Data source:
+- Original prebuild-install: 770KB
+- [**@karinjs/prebuild-install**](https://github.com/karinjs/prebuild-install): 146KB
+
+This means faster installation times and reduced disk space usage when using [**@karinjs/prebuild-install**](https://github.com/karinjs/prebuild-install). Data source:
+
 - [prebuild-install package size analysis](https://pkg-size.dev/prebuild-install)
 - [@karinjs/prebuild-install package size analysis](https://pkg-size.dev/@karinjs/prebuild-install)
 
@@ -208,3 +224,6 @@ npx @karinjs/prebuild-install -r napi
 ## License
 
 [MIT](./LICENSE)
+
+```
+```

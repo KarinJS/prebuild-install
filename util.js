@@ -5,7 +5,7 @@ const crypto = require('crypto')
 const expandTemplate = require('expand-template')()
 
 function getDownloadUrl (opts) {
-  const pkgName = opts.pkg.name.replace(/^@[a-zA-Z0-9_\-.~]+\//, '')
+  const pkgName = (opts.binaryName || opts.pkg.name).replace(/^@[a-zA-Z0-9_\-.~]+\//, '')
   return expandTemplate(urlTemplate(opts), {
     name: pkgName,
     package_name: pkgName,
@@ -41,14 +41,14 @@ function urlTemplate (opts) {
   }
 
   const packageName = '{name}-v{version}-{runtime}-v{abi}-{platform}{libc}-{arch}.tar.gz'
-  
-  /** 
+
+  /**
    * 新增默认下载地址配置
    * @time 2025年4月14日23:42:50
    */
-  const prebuildPkg = require(`${__dirname}/package.json`)
-  if (prebuildPkg.prebuild[opts.pkg.name]) {
-    return prebuildPkg.prebuild[opts.pkg.name] + '/{tag_prefix}{version}/' + packageName
+  const prebuildPkg = require(path.join(__dirname, 'package.json'))
+  if (prebuildPkg.prebuild[opts.binaryName]) {
+    return prebuildPkg.prebuild[opts.binaryName] + '/{tag_prefix}{version}/' + packageName
   }
 
   const hostMirrorUrl = getHostMirrorUrl(opts)
@@ -62,8 +62,8 @@ function urlTemplate (opts) {
       opts.pkg.binary.host,
       opts.pkg.binary.remote_path,
       opts.pkg.binary.package_name || packageName
-    ].map(function (path) {
-      return trimSlashes(path)
+    ].map(function (p) {
+      return trimSlashes(p)
     }).filter(Boolean).join('/')
   }
 
@@ -75,12 +75,12 @@ function getEnvPrefix (pkgName) {
 }
 
 function getHostMirrorUrl (opts) {
-  const propName = getEnvPrefix(opts.pkg.name) + '_binary_host'
-  return process.env[propName] || process.env[propName + '_mirror']
+  const envName = getEnvPrefix(opts.binaryName) + '_binary_host'
+  return process.env[envName] || process.env[envName + '_mirror']
 }
 
 function trimSlashes (str) {
-  if (str) return str.replace(/^\.\/|^\/|\/$/g, '')
+  if (str) return str.replace(/^\.|^\/|\/$/g, '')
 }
 
 function cachedPrebuild (url) {
@@ -120,24 +120,24 @@ function packageOrigin (env, pkg) {
 }
 
 function localPrebuild (url, opts) {
-  const propName = getEnvPrefix(opts.pkg.name) + '_local_prebuilds'
-  const prefix = process.env[propName] || opts['local-prebuilds'] || 'prebuilds'
+  const envName = getEnvPrefix(opts.binaryName) + '_local_prebuilds'
+  const prefix = process.env[envName] || opts['local-prebuilds'] || 'prebuilds'
   return path.join(prefix, path.basename(url))
 }
 
 const noopLogger = {
-  http: function () {},
-  silly: function () {},
-  debug: function () {},
-  info: function () {},
-  warn: function () {},
-  error: function () {},
-  critical: function () {},
-  alert: function () {},
-  emergency: function () {},
-  notice: function () {},
-  verbose: function () {},
-  fatal: function () {}
+  http: function () { },
+  silly: function () { },
+  debug: function () { },
+  info: function () { },
+  warn: function () { },
+  error: function () { },
+  critical: function () { },
+  alert: function () { },
+  emergency: function () { },
+  notice: function () { },
+  verbose: function () { },
+  fatal: function () { }
 }
 
 exports.getDownloadUrl = getDownloadUrl

@@ -232,3 +232,47 @@ test('localPrebuild', function (t) {
   t.equal(path3, path.join(envPrefix, basename), 'env overrides opts')
   t.end()
 })
+
+test('getDownloadUrl() and env variable prefix with binaryName', function (t) {
+  const abi = process.versions.modules
+  const opts = {
+    pkg: {
+      name: 'a-native-module',
+      version: '1.2.3',
+      binary: {
+        host: 'https://foo.com',
+        module_name: 'a-native-module-bindings',
+        package_name: '{name}-{version}-{abi}-{platform}-{arch}.tar.gz'
+      }
+    },
+    binaryName: 'custom-binary',
+    platform: 'testos',
+    arch: 'testarch',
+    abi: abi
+  }
+  // 测试下载链接中的 name 替换为 binaryName
+  const url = util.getDownloadUrl(opts)
+  t.ok(url.indexOf('custom-binary') !== -1, 'download url uses binaryName')
+
+  // 测试环境变量前缀
+  const envVar = 'npm_config_custom_binary_binary_host'
+  process.env[envVar] = 'https://env-host.com/path'
+  const url2 = util.urlTemplate(opts)
+  t.ok(url2.indexOf('https://env-host.com/path') === 0, 'env variable prefix uses binaryName')
+  delete process.env[envVar]
+  t.end()
+})
+
+test('localPrebuild() uses binaryName for env variable prefix', function (t) {
+  const opts = {
+    pkg: { name: 'a-native-module' },
+    binaryName: 'custom-binary'
+  }
+  const url = 'https://github.com/a-native-module/a-native-module/releases/download/v1.2.3/custom-binary-v1.2.3-node-v83-testos-testarch.tar.gz'
+  const envVar = 'npm_config_custom_binary_local_prebuilds'
+  process.env[envVar] = '/tmp/custom-prebuilds'
+  const result = util.localPrebuild(url, opts)
+  t.ok(result.indexOf('/tmp/custom-prebuilds') === 0, 'localPrebuild uses binaryName env prefix')
+  delete process.env[envVar]
+  t.end()
+})
