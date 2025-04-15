@@ -82,6 +82,8 @@ prebuild-install [选项]
   --libc                        (使用提供的libc而不是系统默认值)
   --debug                       (设置Debug或Release配置)
   --version                     (打印prebuild-install版本并退出)
+  --pkg_name                    (设置包名称 适用于fork后的包)
+  --pkg_version                 (设置包版本 适用于fork后的包)
 ```
 
 当通过`npm`脚本运行`prebuild-install`时，可以通过给`npm`命令的参数传递选项`--build-from-source`、`--debug`、`--download`、`--target`、`--runtime`、`--arch`、`--platform`和`--libc`。
@@ -169,13 +171,19 @@ leveldown_local_prebuilds=/path/to/prebuilds
 
 你可以通过命令行参数、配置文件或环境变量自定义下载的二进制包名称：
 
-- 命令行：`--binary-name=yourname`
-- 环境变量：`npm_config_binary_name=yourname`
-- 配置文件（.prebuild-installrc）：`binaryName=yourname`
+- 命令行：`--pkg_name=yourname`
+- 环境变量：`npm_config_${pkg_name}_name=yourname`
+- 配置文件（.prebuild-installrc）：`pkg_name=yourname`
 
 此参数会影响下载链接、缓存、环境变量前缀等，适用于多包共用二进制或自定义命名场景。
 
-环境变量如：`npm_config_yourname_binary_host`、`npm_config_yourname_local_prebuilds` 也会自动适配。
+环境变量如：`npm_config_${pkg_name}_name` 也会自动适配。
+
+例如，我的 npm 包名是`@karinjs/sqlite3`，我需要下载`sqlite3`的预构建二进制包，我可以在命令行中执行：
+
+```bash
+npx @karinjs/prebuild-install -r napi --pkg_name=sqlite3
+```
 
 ---
 
@@ -183,11 +191,18 @@ leveldown_local_prebuilds=/path/to/prebuilds
 
 你可以通过命令行参数、配置文件或环境变量自定义下载的二进制包版本：
 
-- 命令行：`--binary-version=yourversion`
-- 环境变量：`npm_config_binary_version=yourversion`
-- 配置文件（.prebuild-installrc）：`binaryVersion=yourversion`
+- 命令行：`--pkg_version=yourversion`
+- 环境变量：`npm_config_${pkg_name}_version=yourversion`
+- 配置文件（.prebuild-installrc）：`pkg_version=yourversion`
 
 此参数会影响下载链接、缓存、环境变量前缀等，适用于多包共用二进制或自定义版本场景。
+
+环境变量如：`npm_config_${pkg_name}_version` 也会自动适配。
+例如，我的 npm 包名是`@karinjs/sqlite3`，我需要下载`sqlite3`的预构建二进制包，我可以在命令行中执行：
+
+```bash
+npx @karinjs/prebuild-install -r napi --pkg_name=sqlite3 --pkg_version=5.1.7
+```
 
 ---
 

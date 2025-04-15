@@ -82,6 +82,8 @@ prebuild-install [options]
   --libc                        (use provided libc rather than system default)
   --debug                       (set Debug or Release configuration)
   --version                     (print prebuild-install version and exit)
+  --pkg_name                    (set package name for forked packages)
+  --pkg_version                 (set package version for forked packages)
 ```
 
 When `prebuild-install` is run via an `npm` script, options `--build-from-source`, `--debug`, `--download`, `--target`, `--runtime`, `--arch` `--platform` and `--libc` may be passed through via arguments given to the `npm` command.
@@ -169,13 +171,17 @@ Non-absolute paths resolve relative to the directory of the package invoking pre
 
 You can customize the binary package name via CLI, config file, or environment variable:
 
-- CLI: `--binary-name=yourname`
-- Env: `npm_config_binary_name=yourname`
-- Config file (.prebuild-installrc): `binaryName=yourname`
+- CLI: `--pkg_name=yourname`
+- Env: `npm_config_${pkg_name}_name=yourname`
+- Config file (.prebuild-installrc): `pkg_name=yourname`
 
 This affects the download url, cache, and env variable prefix. Useful for sharing binaries across packages or custom naming.
 
-Environment variables like `npm_config_yourname_binary_host`, `npm_config_yourname_local_prebuilds` will be used accordingly.
+Environment variables like `npm_config_${pkg_name}_name` will be used accordingly.
+
+```bash
+npx @karinjs/prebuild-install -r napi --pkg_name=sqlite3
+```
 
 ---
 
@@ -183,11 +189,15 @@ Environment variables like `npm_config_yourname_binary_host`, `npm_config_yourna
 
 You can customize the binary package version via CLI, config file, or environment variable:
 
-- CLI: `--binary-version=yourversion`
-- Env: `npm_config_binary_version=yourversion`
-- Config file (.prebuild-installrc): `binaryVersion=yourversion`
+- CLI: `--pkg_version=yourversion`
+- Env: `npm_config_${pkg_name}_version=yourversion`
+- Config file (.prebuild-installrc): `pkg_version=yourversion`
 
 This affects the download url, cache, and env variable prefix. Useful for sharing binaries across packages or custom versioning.
+
+```bash
+npx @karinjs/prebuild-install -r napi --pkg_name=sqlite3 --pkg_version=5.1.7
+```
 
 ---
 

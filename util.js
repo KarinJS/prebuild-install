@@ -5,8 +5,8 @@ const crypto = require('crypto')
 const expandTemplate = require('expand-template')()
 
 function getDownloadUrl (opts) {
-  const pkgName = (opts.binaryName || opts.pkg.name).replace(/^@[a-zA-Z0-9_\-.~]+\//, '')
-  const pkgVersion = opts.binaryVersion || opts.pkg.version
+  const pkgName = opts.pkgName.replace(/^@[a-zA-Z0-9_\-.~]+\//, '')
+  const pkgVersion = opts.pkgVersion || opts.pkg.version
   return expandTemplate(urlTemplate(opts), {
     name: pkgName,
     package_name: pkgName,
@@ -48,8 +48,8 @@ function urlTemplate (opts) {
    * @time 2025年4月14日23:42:50
    */
   const prebuildPkg = require(path.join(__dirname, 'package.json'))
-  if (prebuildPkg.prebuild[opts.binaryName]) {
-    return prebuildPkg.prebuild[opts.binaryName] + '/{tag_prefix}{version}/' + packageName
+  if (prebuildPkg.prebuild[opts.pkgName]) {
+    return prebuildPkg.prebuild[opts.pkgName] + '/{tag_prefix}{version}/' + packageName
   }
 
   const hostMirrorUrl = getHostMirrorUrl(opts)
@@ -76,7 +76,7 @@ function getEnvPrefix (pkgName) {
 }
 
 function getHostMirrorUrl (opts) {
-  const envName = getEnvPrefix(opts.binaryName) + '_binary_host'
+  const envName = getEnvPrefix(opts.pkgName) + '_binary_host'
   return process.env[envName] || process.env[envName + '_mirror']
 }
 
@@ -121,7 +121,7 @@ function packageOrigin (env, pkg) {
 }
 
 function localPrebuild (url, opts) {
-  const envName = getEnvPrefix(opts.binaryName) + '_local_prebuilds'
+  const envName = getEnvPrefix(opts.pkgName) + '_local_prebuilds'
   const prefix = process.env[envName] || opts['local-prebuilds'] || 'prebuilds'
   return path.join(prefix, path.basename(url))
 }

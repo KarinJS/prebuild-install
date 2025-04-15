@@ -13,10 +13,8 @@ const libc = env.LIBC || process.env.npm_config_libc ||
 module.exports = function (pkg) {
   const pkgConf = pkg.config || {}
   const buildFromSource = env.npm_config_build_from_source
-  const binaryName = pkg?.binary?.name || env.npm_config_binary_name
-  const binaryVersion = pkg?.binary?.version || env.npm_config_binary_version
 
-  const rc = require('./rc.module.js')('prebuild-install', {
+  const rc = require('rc')('prebuild-install', {
     target: pkgConf.target || env.npm_config_target || process.versions.node,
     runtime: pkgConf.runtime || env.npm_config_runtime || 'node',
     arch: pkgConf.arch || env.npm_config_arch || process.arch,
@@ -33,8 +31,8 @@ module.exports = function (pkg) {
     'local-prebuilds': 'prebuilds',
     'tag-prefix': 'v',
     download: env.npm_config_download,
-    binaryName: binaryName,
-    binaryVersion: binaryVersion
+    pkgName: env[`npm_config_${pkg.name}_name`] || pkg.name,
+    pkgVersion: env[`npm_config_${pkg.name}_version`] || pkg.version,
   }, minimist(process.argv, {
     alias: {
       target: 't',
@@ -46,13 +44,13 @@ module.exports = function (pkg) {
       download: 'd',
       buildFromSource: 'build-from-source',
       token: 'T',
-      binaryName: 'binary-name',
-      binaryVersion: 'binary-version'
+      pkgName: 'pkg_name',
+      pkgVersion: 'pkg_version'
     }
   }))
 
-  if (!rc.binaryName) rc.binaryName = pkg.name
-  if (!rc.binaryVersion) rc.binaryVersion = pkg.version
+  if (!rc.pkgName) rc.pkgName = pkg.name
+  if (!rc.pkgVersion) rc.pkgVersion = pkg.version
   rc.path = path.resolve(rc.path === true ? '.' : rc.path || '.')
 
   if (napi.isNapiRuntime(rc.runtime) && rc.target === process.versions.node) {

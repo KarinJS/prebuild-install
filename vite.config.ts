@@ -16,7 +16,7 @@ export default defineConfig({
         ...builtinModules.map((mod) => `node:${mod}`),
       ],
     },
-    minify: 'terser',
+    minify: false,
     commonjsOptions: {
       include: [
         './node_modules/**',
@@ -29,7 +29,7 @@ export default defineConfig({
     // 打包完成后，将dist/*.js复制到根目录下
     {
       name: 'copy-dist',
-      writeBundle() {
+      writeBundle () {
         fs.copyFileSync('./dist/bin.js', './prebuild-install.js')
       },
     },
