@@ -3,6 +3,18 @@
 > **一个命令行工具，用于在特定平台上为多个版本的Node.js和Electron轻松安装预构建二进制文件。**
 > 默认情况下，它从GitHub发布版本下载预构建二进制文件。
 
+[English](README.md)
+
+## @karinjs/prebuild-install 增强功能
+
+这个分支包含以下显著改进：
+
+- **内置镜像源**：包含预配置的常用原生模块下载镜像（sqlite3、canvas等），自动使用这些镜像而非GitHub
+- **零依赖**：使用Vite重新构建，消除了所有运行时依赖
+- **显著减小的包体积**：包大小从770KB减少到146KB（[prebuild-install](https://pkg-size.dev/prebuild-install) vs [@karinjs/prebuild-install](https://pkg-size.dev/@karinjs/prebuild-install)）
+
+---
+
 [![npm](https://img.shields.io/npm/v/prebuild-install.svg)](https://www.npmjs.com/package/prebuild-install)
 ![Node version](https://img.shields.io/node/v/prebuild-install.svg)
 [![Test](https://img.shields.io/github/actions/workflow/status/prebuild/prebuild-install/test.yml?label=test)](https://github.com/prebuild/prebuild-install/actions/workflows/test.yml)
@@ -119,6 +131,17 @@ token=<github-token>
 leveldown_binary_host=http://overriden-host.com/overriden-path
 ```
 
+`@karinjs/prebuild-install`内置了常用原生模块的镜像源，这些源会被自动使用而无需任何配置，优先级高于GitHub。目前已内置支持sqlite3和canvas的下载镜像：
+
+```json
+{
+  "prebuild": {
+    "sqlite3": "https://registry.npmmirror.com/-/binary/sqlite3",
+    "canvas": "https://registry.npmmirror.com/-/binary/canvas"
+  }
+}
+```
+
 请注意，包版本子路径和文件名仍会被附加。
 所以如果你安装的是`leveldown@1.2.3`，最终的URL将是：
 
@@ -150,13 +173,39 @@ leveldown_local_prebuilds=/path/to/prebuilds
 - `${APP_DATA}/npm-cache/_prebuilds`
 - `${HOME}/.npm/_prebuilds`
 
+## 打包优化
+
+`@karinjs/prebuild-install`使用Vite进行了二次打包，打包后的产物实现了0依赖，大大减小了包体积。对比数据：
+- 原版prebuild-install: 770KB
+- @karinjs/prebuild-install: 146KB
+
+这意味着在使用@karinjs/prebuild-install时，可以获得更快的安装速度和更小的磁盘占用空间。数据来源：
+- [prebuild-install包大小分析](https://pkg-size.dev/prebuild-install)
+- [@karinjs/prebuild-install包大小分析](https://pkg-size.dev/@karinjs/prebuild-install)
+
 ## 安装
 
 使用[npm](https://npmjs.org)执行：
 
 ```
-npm install prebuild-install
+npm install @karinjs/prebuild-install
 ```
+
+作为别名安装并在项目中使用：
+
+```
+npm install prebuild-install@npm:@karinjs/prebuild-install
+```
+
+## 直接执行
+
+无需安装，直接使用npx执行：
+
+```
+npx @karinjs/prebuild-install -r napi
+```
+
+例如你的`sqlite3@5.1.7`经常报错，你就可以直接`cd node_modules/sqlite3`，然后执行上面这个啦。
 
 ## 许可证
 

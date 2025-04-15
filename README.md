@@ -3,6 +3,18 @@
 > **A command line tool to easily install prebuilt binaries for multiple versions of Node.js & Electron on a specific platform.**
 > By default it downloads prebuilt binaries from a GitHub release.
 
+[中文文档](README_ZH.md)
+
+## @karinjs/prebuild-install Enhancements
+
+This fork includes significant improvements:
+
+- **Built-in mirror sources**: Package includes pre-configured download mirrors for common native modules (sqlite3, canvas, etc.) which are used automatically instead of GitHub
+- **Zero dependencies**: Rebuilt with Vite to eliminate all runtime dependencies
+- **Dramatically reduced size**: Package size reduced from 770KB to 146KB ([prebuild-install](https://pkg-size.dev/prebuild-install) vs [@karinjs/prebuild-install](https://pkg-size.dev/@karinjs/prebuild-install))
+
+---
+
 [![npm](https://img.shields.io/npm/v/prebuild-install.svg)](https://www.npmjs.com/package/prebuild-install)
 ![Node version](https://img.shields.io/node/v/prebuild-install.svg)
 [![Test](https://img.shields.io/github/actions/workflow/status/prebuild/prebuild-install/test.yml?label=test)](https://github.com/prebuild/prebuild-install/actions/workflows/test.yml)
@@ -119,6 +131,17 @@ The variable needs to meet the mask `% your package name %_binary_host` or `% yo
 leveldown_binary_host=http://overriden-host.com/overriden-path
 ```
 
+`@karinjs/prebuild-install` comes with built-in mirror sources for common native modules, which are automatically used without any configuration, taking precedence over GitHub. Currently, download mirrors for sqlite3 and canvas are built-in:
+
+```json
+{
+  "prebuild": {
+    "sqlite3": "https://registry.npmmirror.com/-/binary/sqlite3",
+    "canvas": "https://registry.npmmirror.com/-/binary/canvas"
+  }
+}
+```
+
 Note that the package version subpath and file name will still be appended.
 So if you are installing `leveldown@1.2.3` the resulting url will be:
 
@@ -150,12 +173,36 @@ All prebuilt binaries are cached to minimize traffic. So first `prebuild-install
 - `${APP_DATA}/npm-cache/_prebuilds`
 - `${HOME}/.npm/_prebuilds`
 
+## Package Optimization
+
+`@karinjs/prebuild-install` has been rebuilt using Vite, resulting in a zero-dependency package that significantly reduces package size. Comparison data:
+- Original prebuild-install: 770KB
+- @karinjs/prebuild-install: 146KB
+
+This means faster installation times and reduced disk space usage when using @karinjs/prebuild-install. Data source:
+- [prebuild-install package size analysis](https://pkg-size.dev/prebuild-install)
+- [@karinjs/prebuild-install package size analysis](https://pkg-size.dev/@karinjs/prebuild-install)
+
 ## Install
 
 With [npm](https://npmjs.org) do:
 
 ```
-npm install prebuild-install
+npm install @karinjs/prebuild-install
+```
+
+Install as an alias and use in your project:
+
+```
+npm install prebuild-install@npm:@karinjs/prebuild-install
+```
+
+## Direct Execution
+
+Use npx to run without installation:
+
+```
+npx @karinjs/prebuild-install -r napi
 ```
 
 ## License
