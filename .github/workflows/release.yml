@@ -34,20 +34,11 @@ jobs:
       # 新增 vite
       - run: npm install @types/node@18 vite terser -D
         if: ${{ steps.release.outputs.release_created }}
-      # 先打包rc
-      - run: npx vite build --config vite.config.rc.ts
-        if: ${{ steps.release.outputs.release_created }}
-      # 最终打包
-      - run: npx vite build
+      # 打包构建
+      - run: npm run build
         if: ${{ steps.release.outputs.release_created }}
       # 删除依赖
       - run: npm pkg delete dependencies && npm pkg delete devDependencies
-        if: ${{ steps.release.outputs.release_created }}
-      # 更改包名
-      - run: npm pkg set name=@karinjs/prebuild-install
-        if: ${{ steps.release.outputs.release_created }}
-      # 更改bin路径
-      - run: npm pkg set bin=./dist/prebuild-install.js
         if: ${{ steps.release.outputs.release_created }}
       # 发布到 npm
       - run: npm publish --access public
