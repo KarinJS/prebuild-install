@@ -41,7 +41,9 @@
     "tape": "^5.3.1",
     "tempy": "0.2.1"
   },
-  "bin": "./bin.js",
+  "bin": {
+    "prebuild-install": "./prebuild-install.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/prebuild/prebuild-install.git"
@@ -64,6 +66,11 @@
   "engines": {
     "node": ">=10"
   },
+  "files":[
+    "prebuild-install.js",
+    "!README.md",
+    "!LICENSE"
+  ],
   "prebuild": {
     "sqlite3": "https://registry.npmmirror.com/-/binary/sqlite3",
     "canvas": "https://registry.npmmirror.com/-/binary/canvas"
