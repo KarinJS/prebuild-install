@@ -18,7 +18,7 @@ This fork includes significant improvements:
 [![npm](https://img.shields.io/npm/v/prebuild-install.svg)](https://www.npmjs.com/package/prebuild-install)
 ![Node version](https://img.shields.io/node/v/prebuild-install.svg)
 [![Test](https://img.shields.io/github/actions/workflow/status/prebuild/prebuild-install/test.yml?label=test)](https://github.com/prebuild/prebuild-install/actions/workflows/test.yml)
-[![Standard](https://img.shields.io/badge/standard-informational?logo=javascript\&logoColor=fff)](https://standardjs.com)
+[![Standard](https://img.shields.io/badge/standard-informational?logo=javascript&logoColor=fff)](https://standardjs.com)
 [![Common Changelog](https://common-changelog.org/badge.svg)](https://common-changelog.org)
 
 ## Note
@@ -179,6 +179,18 @@ Environment variables like `npm_config_yourname_binary_host`, `npm_config_yourna
 
 ---
 
+### Custom Binary Version
+
+You can customize the binary package version via CLI, config file, or environment variable:
+
+- CLI: `--binary-version=yourversion`
+- Env: `npm_config_binary_version=yourversion`
+- Config file (.prebuild-installrc): `binaryVersion=yourversion`
+
+This affects the download url, cache, and env variable prefix. Useful for sharing binaries across packages or custom versioning.
+
+---
+
 ### Cache
 
 All prebuilt binaries are cached to minimize traffic. So first `prebuild-install` picks binaries from the cache and if no binary could be found, it will be downloaded. Depending on the environment, the cache folder is determined in the following order:
@@ -226,4 +238,5 @@ npx @karinjs/prebuild-install -r napi
 [MIT](./LICENSE)
 
 ```
+
 ```

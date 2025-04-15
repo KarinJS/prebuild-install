@@ -6,15 +6,16 @@ const expandTemplate = require('expand-template')()
 
 function getDownloadUrl (opts) {
   const pkgName = (opts.binaryName || opts.pkg.name).replace(/^@[a-zA-Z0-9_\-.~]+\//, '')
+  const pkgVersion = opts.binaryVersion || opts.pkg.version
   return expandTemplate(urlTemplate(opts), {
     name: pkgName,
     package_name: pkgName,
-    version: opts.pkg.version,
-    major: opts.pkg.version.split('.')[0],
-    minor: opts.pkg.version.split('.')[1],
-    patch: opts.pkg.version.split('.')[2],
-    prerelease: opts.pkg.version.split('-')[1],
-    build: opts.pkg.version.split('+')[1],
+    version: pkgVersion,
+    major: pkgVersion.split('.')[0],
+    minor: pkgVersion.split('.')[1],
+    patch: pkgVersion.split('.')[2],
+    prerelease: pkgVersion.split('-')[1],
+    build: pkgVersion.split('+')[1],
     abi: opts.abi || process.versions.modules,
     node_abi: process.versions.modules,
     runtime: opts.runtime || 'node',
