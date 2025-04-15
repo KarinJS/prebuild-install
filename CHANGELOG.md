@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/KarinJS/prebuild-install/compare/v1.0.0...v1.0.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* 启用代码压缩 ([1416ee1](https://github.com/KarinJS/prebuild-install/commit/1416ee1011258c277c944ed1f791ced4b672b9e8))
+
 ## 1.0.0 (2025-04-15)
 
 
