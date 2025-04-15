@@ -12,10 +12,11 @@ const libc = env.LIBC || process.env.npm_config_libc ||
 // Get the configuration
 module.exports = function (pkg) {
   const pkgConf = pkg.config || {}
+  const buildFromSource = env.npm_config_build_from_source
   const binaryName = pkg?.binary?.name || env.npm_config_binary_name
   const binaryVersion = pkg?.binary?.version || env.npm_config_binary_version
 
-  const rc = require('rc')('prebuild-install', {
+  const rc = require('./rc.module.js')('prebuild-install', {
     target: pkgConf.target || env.npm_config_target || process.versions.node,
     runtime: pkgConf.runtime || env.npm_config_runtime || 'node',
     arch: pkgConf.arch || env.npm_config_arch || process.arch,
