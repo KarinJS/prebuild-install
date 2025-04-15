@@ -34,7 +34,7 @@ export default defineConfig({
         console.log(`Copied ${src} to ${dest}`)
 
         /** 将rc.js中的`require('rc')` 替换为`require('./rc.module.js')` */
-        const rcPath = './node_modules/rc/index.js'
+        const rcPath = './rc.js'
         const rcContent = fs.readFileSync(rcPath, 'utf-8')
         const newRcContent = rcContent.replace(/require\('rc'\)/g, `require('./rc.module.js')`)
         fs.writeFileSync(rcPath, newRcContent)

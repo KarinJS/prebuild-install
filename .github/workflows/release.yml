@@ -43,6 +43,12 @@ jobs:
       # 删除依赖
       - run: npm pkg delete dependencies && npm pkg delete devDependencies
         if: ${{ steps.release.outputs.release_created }}
+      # 更改包名
+      - run: npm pkg set name=@karinjs/prebuild-install
+        if: ${{ steps.release.outputs.release_created }}
+      # 更改bin路径
+      - run: npm pkg set bin=./dist/prebuild-install.js
+        if: ${{ steps.release.outputs.release_created }}
       # 发布到 npm
       - run: npm publish --access public
         env:

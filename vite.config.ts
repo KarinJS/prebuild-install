@@ -7,10 +7,7 @@ export default defineConfig({
     target: 'es2015',
     lib: {
       formats: ['cjs'],
-      entry: [
-        './index.js',
-        './bin.js',
-      ],
+      entry: ['./bin.js',],
     },
     outDir: 'dist',
     rollupOptions: {
@@ -31,15 +28,9 @@ export default defineConfig({
   plugins: [
     // 打包完成后，将dist/*.js复制到根目录下
     {
-      name: 'copy-files',
+      name: 'copy-dist',
       writeBundle() {
-        const files = fs.readdirSync('./dist')
-        files.forEach((file) => {
-          const src = `./dist/${file}`
-          const dest = `./${file}`
-          fs.copyFileSync(src, dest)
-          console.log(`Copied ${src} to ${dest}`)
-        })
+        fs.copyFileSync('./dist/bin.js', './prebuild-install.js')
       },
     },
   ]
