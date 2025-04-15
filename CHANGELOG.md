@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/KarinJS/prebuild-install/compare/v1.2.1...v1.2.2) (2025-04-15)
+
+
+### Bug Fixes
+
+* 统一参数 ([7d98fda](https://github.com/KarinJS/prebuild-install/commit/7d98fdad5349ce7f0af3afc22fe5544031eea2fe))
+
 ## [1.2.1](https://github.com/KarinJS/prebuild-install/compare/v1.2.0...v1.2.1) (2025-04-15)
 
 
