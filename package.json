@@ -74,6 +74,7 @@
   ],
   "prebuild": {
     "sqlite3": "https://registry.npmmirror.com/-/binary/sqlite3",
-    "canvas": "https://registry.npmmirror.com/-/binary/canvas"
+    "canvas": "https://registry.npmmirror.com/-/binary/canvas",
+    "node-pty-prebuilt-multiarch": "https://registry.npmmirror.com/-/binary/node-pty-prebuilt-multiarch"
   }
 }

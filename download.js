@@ -10,6 +10,7 @@ const proxy = require('./proxy')
 const mkdirp = require('mkdirp-classic')
 
 function downloadPrebuild (downloadUrl, opts, cb) {
+  log.info('downloadUrl', downloadUrl, opts)
   let cachedPrebuild = util.cachedPrebuild(downloadUrl)
   const localPrebuild = util.localPrebuild(downloadUrl, opts)
   const tempFile = util.tempFile(cachedPrebuild)
