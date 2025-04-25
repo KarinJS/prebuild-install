@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/KarinJS/prebuild-install/compare/v1.2.2...v1.3.0) (2025-04-25)
+
+
+### Features
+
+* 在下载函数中添加日志记录，更新package.json以支持新的依赖项`node-pty-prebuilt-multiarch` ([28b3f53](https://github.com/KarinJS/prebuild-install/commit/28b3f5304f611f04ad8fce7633f3e5276de3d97f))
+
 ## [1.2.2](https://github.com/KarinJS/prebuild-install/compare/v1.2.1...v1.2.2) (2025-04-15)
 
 
