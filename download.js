@@ -10,11 +10,11 @@ const proxy = require('./proxy')
 const mkdirp = require('mkdirp-classic')
 
 function downloadPrebuild (downloadUrl, opts, cb) {
+  const log = opts.log || util.noopLogger
   log.info('downloadUrl', downloadUrl, opts)
   let cachedPrebuild = util.cachedPrebuild(downloadUrl)
   const localPrebuild = util.localPrebuild(downloadUrl, opts)
   const tempFile = util.tempFile(cachedPrebuild)
-  const log = opts.log || util.noopLogger
 
   if (opts.nolocal) return download()
 
