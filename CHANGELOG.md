@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.5](https://github.com/KarinJS/prebuild-install/compare/v1.3.4...v1.3.5) (2025-07-04)
+
+
+### Bug Fixes
+
+* ? ([ff94a2a](https://github.com/KarinJS/prebuild-install/commit/ff94a2a1243531e86385960ae7391b6e06c37178))
+
 ## [1.3.4](https://github.com/KarinJS/prebuild-install/compare/v1.3.3...v1.3.4) (2025-07-04)
 
 
