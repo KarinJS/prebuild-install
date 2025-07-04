@@ -67,8 +67,9 @@ function runMain () {
   }
 
   const startDownload = function (downloadUrl) {
+    const prebuildGithub = require('./package.json')['prebuild-github']
     /** 需要进行替换 */
-    Object.entries(pkg['prebuild-github']).forEach(([key, value]) => {
+    Object.entries(prebuildGithub).forEach(([key, value]) => {
       downloadUrl = downloadUrl.replace(new RegExp(key, 'i'), value)
     })
 
