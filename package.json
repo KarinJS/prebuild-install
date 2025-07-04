@@ -50,7 +50,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/prebuild/prebuild-install.git"
+    "url": "https://github.com/karinjs/prebuild-install.git"
   },
   "author": "Mathias Buus (@mafintosh)",
   "contributors": [
@@ -64,9 +64,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/prebuild/prebuild-install/issues"
+    "url": "https://github.com/karinjs/prebuild-install/issues"
   },
-  "homepage": "https://github.com/prebuild/prebuild-install",
+  "homepage": "https://github.com/karinjs/prebuild-install",
   "engines": {
     "node": ">=10"
   },

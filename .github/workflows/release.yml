@@ -23,6 +23,13 @@ jobs:
       # 检出代码
       - uses: actions/checkout@v4
         if: ${{ steps.release.outputs.release_created }}
+      # 设置 Node.js 环境
+      - uses: actions/setup-node@v4
+        with:
+          # 设置 Node.js 版本
+          node-version: 20
+          # 设置 npm 源
+          registry-url: "https://registry.npmjs.org"
       # 设置 pnpm
       - name: 设置 pnpm
         uses: pnpm/action-setup@v2
