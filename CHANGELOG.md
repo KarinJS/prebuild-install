@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.7](https://github.com/KarinJS/prebuild-install/compare/v1.3.6...v1.3.7) (2025-07-04)
+
+
+### Bug Fixes
+
+* 环境变量设置错误 ([801652f](https://github.com/KarinJS/prebuild-install/commit/801652f95c7075089c6a86b480b8909ce65dcf33))
+
 ## [1.3.6](https://github.com/KarinJS/prebuild-install/compare/v1.3.5...v1.3.6) (2025-07-04)
 
 
