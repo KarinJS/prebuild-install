@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/KarinJS/prebuild-install/compare/v1.3.1...v1.3.2) (2025-07-04)
+
+
+### Bug Fixes
+
+* 网络环境检测 ([73e10ca](https://github.com/KarinJS/prebuild-install/commit/73e10ca721ef6e7b2aeeef58d88ca9094882c30f))
+
 ## [1.3.1](https://github.com/KarinJS/prebuild-install/compare/v1.3.0...v1.3.1) (2025-04-25)
 
 
