@@ -48,7 +48,7 @@ function urlTemplate (opts) {
    * @time 2025年4月14日23:42:50
    */
   const prebuildPkg = require(path.join(__dirname, 'package.json'))
-  if (prebuildPkg.prebuild[opts.pkgName]) {
+  if (opts.pkgName && prebuildPkg.prebuild[opts.pkgName] && process.env.IS_CHINA_NETWORK) {
     return prebuildPkg.prebuild[opts.pkgName] + '/{tag_prefix}{version}/' + packageName
   }
 
