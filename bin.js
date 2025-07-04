@@ -15,7 +15,8 @@ download.getFastRegistry(function (err, fastRegistry) {
   if (err) {
     log.warn('network', '网络环境检测失败')
   } else {
-    process.env.IS_CHINA_NETWORK = download.isChinaNetwork(fastRegistry)
+    const isChinaNetwork = download.isChinaNetwork(fastRegistry)
+    if (isChinaNetwork) process.env.IS_CHINA_NETWORK = 'true'
     log.info('network', log.logColors.info(fastRegistry))
   }
   runMain()
