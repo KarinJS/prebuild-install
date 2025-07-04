@@ -79,5 +79,9 @@
     "sqlite3": "https://registry.npmmirror.com/-/binary/sqlite3",
     "canvas": "https://registry.npmmirror.com/-/binary/canvas",
     "node-pty-prebuilt-multiarch": "https://registry.npmmirror.com/-/binary/node-pty-prebuilt-multiarch"
+  },
+  "prebuild-github": {
+    "KarinJS/sqlite3": "TryGhost/node-sqlite3",
+    "KarinJS/node-pty": "homebridge/node-pty-prebuilt-multiarch"
   }
 }
