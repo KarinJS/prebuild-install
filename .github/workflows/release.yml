@@ -23,17 +23,12 @@ jobs:
       # 检出代码
       - uses: actions/checkout@v4
         if: ${{ steps.release.outputs.release_created }}
-      # 设置 Node.js 环境
-      - uses: actions/setup-node@v4
+      # 设置 pnpm
+      - name: 设置 pnpm
+        uses: pnpm/action-setup@v2
         with:
-          # 设置 Node.js 版本
-          node-version: 20
-          # 设置 npm 源
-          registry-url: https://registry.npmjs.org
-        if: ${{ steps.release.outputs.release_created }}
-      # 新增 vite
-      - run: npm install @types/node@18 vite terser -D
-        if: ${{ steps.release.outputs.release_created }}
+          version: 9
+          run_install: true
       # 打包构建
       - run: npm run build
         if: ${{ steps.release.outputs.release_created }}

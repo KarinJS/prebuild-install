@@ -34,13 +34,16 @@
     "tunnel-agent": "^0.6.0"
   },
   "devDependencies": {
+    "@types/node": "^18.19.115",
     "a-native-module": "^1.0.0",
     "hallmark": "^4.0.0",
     "nock": "^10.0.6",
     "rimraf": "^2.5.2",
     "standard": "^16.0.4",
     "tape": "^5.3.1",
-    "tempy": "0.2.1"
+    "tempy": "0.2.1",
+    "terser": "^5.43.1",
+    "vite": "^6.3.5"
   },
   "bin": {
     "prebuild-install": "./prebuild-install.js"
